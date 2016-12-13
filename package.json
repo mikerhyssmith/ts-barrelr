@@ -1,36 +1,40 @@
 {
-    "name": "ng2-ts-barrelr",
-    "displayName": "ng2-ts-barrelr",
-    "description": "Barreler for angular2 typescript apps",
-    "version": "0.0.1",
-    "publisher": "mikerhyssmith",
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:extension.barrel"
-    ],
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [{
-            "command": "extension.barrel",
-            "title": "Barrel"
-        }]
-    },
-    "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
-    }
+  "name": "ng2-ts-barrelr",
+  "displayName": "ng2-ts-barrelr",
+  "description": "Barreler for angular2 typescript apps",
+  "version": "0.0.1",
+  "publisher": "mikerhyssmith",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.barrel"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.barrel",
+        "title": "Barrel"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.40",
+    "@types/sinon": "^1.16.33",
+    "mocha": "^2.3.3",
+    "sinon": "^1.17.6",
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0"
+  }
 }
