@@ -3,7 +3,7 @@ import * as Sinon from 'sinon';
 
 import BarrelProducer from "../src/barrelProducer";
 
-suite("File Gatherer Tests", () => {
+suite("Barrel Producer Tests", () => {
     var barrelProducer: BarrelProducer
 
     suiteSetup(() => {
@@ -13,12 +13,12 @@ suite("File Gatherer Tests", () => {
     test("Given file name add export should add export", () => {
         let returnedName = this.barrelProducer.addExport("./file");
 
-        assert.equal(returnedName, "export * from \"./file\"");
+        assert.equal(returnedName, "export * from \"./file\" \n");
     });
 
     test("Given file names produceExports add exports to all files and directorys", () => {
         let returnedNames = this.barrelProducer.produceExports(["./file", "./folder", "./secondFolder"]);
 
-        assert.deepStrictEqual(returnedNames, ["export * from \"./file\"", "export * from \"./folder\"", "export * from \"./secondFolder\""]);
+        assert.deepStrictEqual(returnedNames, ["export * from \"./file\" \n", "export * from \"./folder\" \n", "export * from \"./secondFolder\" \n"]);
     });
 });

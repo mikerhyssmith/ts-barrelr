@@ -9,11 +9,13 @@ export default class Barrelr {
     barrelProducer: BarrelProducer = new BarrelProducer();
 
     barrel(fileLocation: string): Promise<string> {
+        console.log(fileLocation);
        return this.fileGatherer.gather(fileLocation).then((result) => {
-            return this.barrelProducer.produceBarrel(path.dirname(fileLocation), result);
+           console.log(result);
+            return this.barrelProducer.produceBarrel(fileLocation, result);
         })
         .catch(err => {
-            vscode.window.showInformationMessage('Barelling failed :(');
+            console.log("Barrelr" + err);
         })
     }
 }

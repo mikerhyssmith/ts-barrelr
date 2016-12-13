@@ -33,7 +33,7 @@ suite("File Gatherer Tests", () => {
         fsStatSync.withArgs("C:/Mike/file.ts").returns(fileObject);
         fsStatSync.withArgs("C:/Mike/secondFile.ts").returns(fileObject);
         
-        let returnedFileNames = this.fileGatherer.produceBarreledNames(["C:/Mike/folder", "C:/Mike/secondFolder", "C:/Mike/file.ts", "C:/Mike/secondFile.ts"], false);
+        let returnedFileNames = this.fileGatherer.produceBarreledNames(["folder", "secondFolder", "file.ts", "secondFile.ts"], "C:/Mike");
         let expectedFileNames = ["./folder", "./secondFolder", "./file", "./secondFile"];
         assert.deepStrictEqual(returnedFileNames, expectedFileNames);
     });

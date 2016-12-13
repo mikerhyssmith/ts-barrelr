@@ -14,14 +14,16 @@ export default class BarrelProducer {
     writeFiles(exportedFileNames: Array<string>, directory:string): Promise<string>  {
         return new Promise((resolve, reject) => {
             fs.writeFile(directory + "/index.ts", exportedFileNames, (err) => {
-                if(err) reject("Writing to file failed")
+                if(err) {
+                    console.log(err);
+                }
                 else resolve("Barrel written")
             })
         });
     }
 
     addExport(fileName: string) {
-        return "export * from " + "\"" + fileName + "\"";
+        return "export * from " + "\"" + fileName + "\" \n";
     }
 
 }

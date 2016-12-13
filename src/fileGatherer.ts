@@ -1,25 +1,29 @@
 import * as fs from "fs";
+import * as path from "path";
 
 export default class FileGatherer {
      gather(directory: string) : Promise<Array<string>> {
         return new Promise((resolve, reject) => {
             fs.readdir(directory, (err, files) => {
-                if(err) reject("Could not read directory")
+                if(err){
+                    console.log(err);
+                    reject(err)
+                } 
                 else
-                resolve(this.produceBarreledNames(files));
+                resolve(this.produceBarreledNames(files, directory));
 
             })
         })
      }
     
-    produceBarreledNames(files: string[]): Array<string> {
+    produceBarreledNames(files: string[], directory): Array<string> {
         let directories: string[] = [];
         let outputFiles: string[] = [];
 
-        files.filter(file => fs.statSync(file).isDirectory()).forEach((directory) => {
+        files.filter(file => fs.statSync(directory + "/" + file).isDirectory()).forEach((directory) => {
             directories.push(this.produceBarellableName(directory,true));
         });
-        files.filter(file => fs.statSync(file).isFile()).forEach((file) => {
+        files.filter(file => fs.statSync(directory + "/" + file).isFile()).forEach((file) => {
             outputFiles.push(this.produceBarellableName(file,false));
         });
 
@@ -28,9 +32,9 @@ export default class FileGatherer {
 
     produceBarellableName(name: string, directory: boolean): string {
         if(directory) {
-            return  "." +  name.substring(name.lastIndexOf("/"));
+            return  "./" +  path.basename(name);
         }else {
-            return "." + name.substring(name.lastIndexOf("/"), name.lastIndexOf("."));
+            return "./" + path.basename(name, ".ts");
         }
     }
 
