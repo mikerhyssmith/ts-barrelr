@@ -1,7 +1,7 @@
 {
-  "name": "ng2-ts-barrelr",
-  "displayName": "ng2-ts-barrelr",
-  "description": "Barreler for angular2 typescript apps",
+  "name": "ts-barrelr",
+  "displayName": "ts-barrelr",
+  "description": "Barreler for typescript apps",
   "version": "0.0.1",
   "publisher": "mikerhyssmith",
   "engines": {
