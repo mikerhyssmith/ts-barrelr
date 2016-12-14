@@ -5,10 +5,7 @@ export default class FileGatherer {
      gather(directory: string) : Promise<Array<string>> {
         return new Promise((resolve, reject) => {
             fs.readdir(directory, (err, files) => {
-                if(err){
-                    console.log(err);
-                    reject(err)
-                } 
+                if(err)reject(err)
                 else
                 resolve(this.produceBarreledNames(files, directory));
 

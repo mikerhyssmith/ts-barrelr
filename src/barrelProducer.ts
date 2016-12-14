@@ -14,9 +14,7 @@ export default class BarrelProducer {
     writeFiles(exportedFileNames: Array<string>, directory:string): Promise<string>  {
         return new Promise((resolve, reject) => {
             fs.writeFile(directory + "/index.ts", exportedFileNames.join(""), (err) => {
-                if(err) {
-                    console.log(err);
-                }
+                if(err) reject(err)
                 else resolve("Barrel written")
             })
         });
