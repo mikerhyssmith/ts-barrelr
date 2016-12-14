@@ -4,6 +4,7 @@
   "description": "Barreler for typescript apps",
   "version": "0.0.1",
   "publisher": "mikerhyssmith",
+  "icon": "./icon/barrelr.png",
   "engines": {
     "vscode": "^1.5.0"
   },
