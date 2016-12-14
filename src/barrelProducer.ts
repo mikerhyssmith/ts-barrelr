@@ -23,7 +23,7 @@ export default class BarrelProducer {
     }
 
     addExport(fileName: string) {
-        return "export * from " + "\"" + fileName + "\" \n";
+        return "export * from " + "\"" + fileName + "\";\n";
     }
 
 }

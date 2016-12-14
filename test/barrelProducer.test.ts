@@ -13,12 +13,12 @@ suite("Barrel Producer Tests", () => {
     test("Given file name add export should add export", () => {
         let returnedName = this.barrelProducer.addExport("./file");
 
-        assert.equal(returnedName, "export * from \"./file\" \n");
+        assert.equal(returnedName, "export * from \"./file\";\n");
     });
 
     test("Given file names produceExports add exports to all files and directorys", () => {
         let returnedNames = this.barrelProducer.produceExports(["./file", "./folder", "./secondFolder"]);
 
-        assert.deepStrictEqual(returnedNames, ["export * from \"./file\" \n", "export * from \"./folder\" \n", "export * from \"./secondFolder\" \n"]);
+        assert.deepStrictEqual(returnedNames, ["export * from \"./file\";\n", "export * from \"./folder\";\n", "export * from \"./secondFolder\";\n"]);
     });
 });
