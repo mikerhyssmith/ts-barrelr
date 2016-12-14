@@ -23,8 +23,11 @@ export default class FileGatherer {
         files.filter(file => fs.statSync(directory + "/" + file).isDirectory()).forEach((directory) => {
             directories.push(this.produceBarellableName(directory,true));
         });
-        files.filter(file => fs.statSync(directory + "/" + file).isFile()).filter(file => file !== "index.ts").forEach((file) => {
-            outputFiles.push(this.produceBarellableName(file,false));
+        files.filter(file => fs.statSync(directory + "/" + file).isFile())
+            .filter(file => file !== "index.ts")
+                .filter(file => path.extname(file) === ".ts")
+                    .forEach((file) => {
+                        outputFiles.push(this.produceBarellableName(file,false));
         });
 
         return directories.concat(outputFiles);
