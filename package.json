@@ -2,7 +2,7 @@
     "name": "ts-barrelr",
     "displayName": "ts-barrelr",
     "description": "Barreler for typescript apps",
-    "version": "0.0.6",
+    "version": "0.1.0",
     "publisher": "mikerhyssmith",
     "icon": "icon/barrelr.png",
     "repository": "https://github.com/mikerhyssmith/ts-barrelr",
