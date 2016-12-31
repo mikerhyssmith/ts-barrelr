@@ -22,7 +22,13 @@
                 "command": "extension.barrel",
                 "title": "Barrel"
             }
-        ]
+        ],
+        "keybindings": [{
+            "command": "extension.barrel",
+            "key": "ctrl+alt+b",
+            "mac": "cmd+alt+b",
+            "when": "editorTextFocus"
+        }]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
