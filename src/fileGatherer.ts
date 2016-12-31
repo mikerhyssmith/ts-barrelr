@@ -23,6 +23,8 @@ export default class FileGatherer {
         files.filter(file => fs.statSync(directory + "/" + file).isFile())
             .filter(file => file !== "index.ts")
                 .filter(file => path.extname(file) === ".ts")
+                    .filter(file => !file.includes("spec."))
+                        .filter(file => !file.includes("test."))
                     .forEach((file) => {
                         outputFiles.push(this.produceBarellableName(file,false));
         });

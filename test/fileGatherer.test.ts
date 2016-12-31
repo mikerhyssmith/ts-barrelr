@@ -20,6 +20,8 @@ suite("File Gatherer Tests", () => {
         fsStatSync.withArgs("C:/Mike/index.ts").returns(fileObject);
         fsStatSync.withArgs("C:/Mike/template.html").returns(fileObject);
         fsStatSync.withArgs("C:/Mike/image.png").returns(fileObject);
+        fsStatSync.withArgs("C:/Mike/file.test.ts").returns(fileObject);
+        fsStatSync.withArgs("C:/Mike/file.spec.ts").returns(fileObject);
     })
 
     test("Given Directory, produce barellable name should produce correct format", () => {
@@ -49,6 +51,18 @@ suite("File Gatherer Tests", () => {
     test("Given list of files including non ts files, produceBarreledNames should produce correct array of files and folders without non typescript files", () => {
         let returnedFileNames = this.fileGatherer.produceBarreledNames(["folder", "secondFolder", "file.ts", "secondFile.ts", "template.html", "image.png"], "C:/Mike");
         let expectedFileNames = ["./folder", "./secondFolder", "./file", "./secondFile"];
+        assert.deepStrictEqual(returnedFileNames, expectedFileNames);
+    });
+
+    test("Given list of files including test.ts files, produceBarreledNames should produce correct array of files and folders without test files", () => {
+        let returnedFileNames = this.fileGatherer.produceBarreledNames(["file.ts", "file.test.ts"], "C:/Mike");
+        let expectedFileNames = ["./file"];
+        assert.deepStrictEqual(returnedFileNames, expectedFileNames);
+    });
+
+    test("Given list of files including spec.ts files, produceBarreledNames should produce correct array of files and folders without spec files", () => {
+        let returnedFileNames = this.fileGatherer.produceBarreledNames(["file.ts", "file.spec.ts"], "C:/Mike");
+        let expectedFileNames = ["./file"];
         assert.deepStrictEqual(returnedFileNames, expectedFileNames);
     });
 });
