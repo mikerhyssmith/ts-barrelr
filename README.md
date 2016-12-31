@@ -12,6 +12,8 @@ Ts-barrelr will produce an index.ts containing all files and folders within the 
 
 Running the barrelr with an existing index.ts will update it with any changes to files within the folder.
 
+The default keybinding to barrel is "ctrl-alt-b" for windows and linux users and "cmd-alt-b" for mac users.
+
 
 ## Upcoming Features
 Recursive barreling - from a directory barrelr will produce index.ts files for the current directory and all sub directories.
