@@ -1,27 +1,27 @@
 import * as fs from "fs";
 import * as path from "path";
+import * as glob from "glob";
 
 export default class FileGatherer {
      gather(directory: string) : Promise<Array<string>> {
         return new Promise((resolve, reject) => {
-            fs.readdir(directory, (err, files) => {
+            glob(directory, (err, files) => {
                 if(err)reject(err)
                 else
-                resolve(this.produceBarreledNames(files, directory));
-
+                resolve(this.produceBarreledNames(files));
             })
         })
      }
     
-    produceBarreledNames(files: string[], directory): Array<string> {
+    produceBarreledNames(files: string[]): Array<string> {
         let directories: string[] = [];
         let outputFiles: string[] = [];
 
-        files.filter(file => fs.statSync(directory + "/" + file).isDirectory()).forEach((directory) => {
+        files.filter(file => fs.statSync(file).isDirectory()).forEach((directory) => {
             directories.push(this.produceBarellableName(directory,true));
         });
-        files.filter(file => fs.statSync(directory + "/" + file).isFile())
-            .filter(file => file !== "index.ts")
+        files.filter(file => fs.statSync(file).isFile())
+            .filter(file => !file.includes("index.ts"))
                 .filter(file => path.extname(file) === ".ts")
                     .filter(file => !file.includes("spec."))
                         .filter(file => !file.includes("test."))

@@ -1,48 +1,64 @@
 {
-    "name": "ts-barrelr",
-    "displayName": "ts-barrelr",
-    "description": "Barreler for typescript apps",
-    "version": "0.1.0",
-    "publisher": "mikerhyssmith",
-    "icon": "icon/barrelr.png",
-    "repository": "https://github.com/mikerhyssmith/ts-barrelr",
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Other"
+  "name": "ts-barrelr",
+  "displayName": "ts-barrelr",
+  "description": "Barreler for typescript apps",
+  "version": "0.1.0",
+  "publisher": "mikerhyssmith",
+  "icon": "icon/barrelr.png",
+  "repository": "https://github.com/mikerhyssmith/ts-barrelr",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.barrel"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.barrel",
+        "title": "Barrel"
+      },
+      {
+        "command": "extension.recursiveBarrel",
+        "title": "Barrel Recursively"
+      }
     ],
-    "activationEvents": [
-        "onCommand:extension.barrel"
-    ],
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.barrel",
-                "title": "Barrel"
-            }
-        ],
-        "keybindings": [{
-            "command": "extension.barrel",
-            "key": "ctrl+alt+b",
-            "mac": "cmd+alt+b",
-            "when": "editorTextFocus"
-        }]
-    },
-    "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
-        "@types/sinon": "^1.16.33",
-        "mocha": "^2.3.3",
-        "sinon": "^1.17.6",
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0"
-    }
+    "keybindings": [
+      {
+        "command": "extension.barrel",
+        "key": "ctrl+alt+b",
+        "mac": "cmd+alt+b",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.recursiveBarrel",
+        "key": "ctrl+alt+shift+b",
+        "mac": "cmd+alt+shift+b",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.40",
+    "@types/sinon": "^1.16.33",
+    "mocha": "^2.3.3",
+    "sinon": "^1.17.6",
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0"
+  },
+  "dependencies": {
+    "@types/glob": "^5.0.30",
+    "glob": "^7.1.1"
+  }
 }
