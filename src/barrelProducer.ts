@@ -7,7 +7,7 @@ export default class BarrelProducer {
     constructor(private directory: string, private fileNames: Array<string>, private config: Configuration) { }
 
     produceBarrel(): Promise<string> {
-        let exportedFileNames = this.produceExports(this.fileNames);
+        const exportedFileNames = this.produceExports(this.fileNames);
         return this.writeFiles(exportedFileNames, this.directory);
     }
 
@@ -25,7 +25,7 @@ export default class BarrelProducer {
     }
 
     addExport(fileName: string) {
-        let quotemark = this.config.quoteType;
+        const quotemark = this.config.quoteType;
         return "export * from " + quotemark + fileName + quotemark + ";\n";
     }
 }

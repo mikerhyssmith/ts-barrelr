@@ -10,8 +10,8 @@ export default class Barrelr {
     fileGatherer: FileGatherer = new FileGatherer();
     barrelProducer: BarrelProducer;
     configurationService: ConfigurationService = new ConfigurationService();
-    BARREL_GLOB_ENDING: string = "\\*";
-    RECURSIVE_BARREL_GLOB_ENDING: string = "\\**\\*";
+    BARREL_GLOB_ENDING = "\\*";
+    RECURSIVE_BARREL_GLOB_ENDING = "\\**\\*";
 
     barrel(fileLocation: string): Promise<string> {
         return this.configurationService.getConfiguration().then((config: Configuration) => {
@@ -23,9 +23,11 @@ export default class Barrelr {
     }
 
     barrelRecursivey(fileLocation: string): Promise<string> {
-        // return this.fileGatherer.gather(fileLocation + this.RECURSIVE_BARREL_GLOB_ENDING).then((result) => {
-        //     return this.barrelProducer.produceBarrel(fileLocation, result, new Configuration("\'"));
-        // });
-        return undefined;
+        return this.configurationService.getConfiguration().then((config: Configuration) => {
+            return this.fileGatherer.gather(fileLocation + this.RECURSIVE_BARREL_GLOB_ENDING).then((result) => {
+                this.barrelProducer = new BarrelProducer(fileLocation, result, config)
+                return this.barrelProducer.produceBarrel();
+            });
+        });
     }
 }

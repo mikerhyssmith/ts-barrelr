@@ -3,7 +3,7 @@ import * as path from "path";
 import * as glob from "glob";
 
 export default class FileGatherer {
-     gather(directory: string) : Promise<Array<string>> {
+     gather(directory: string): Promise<Array<string>> {
         return new Promise((resolve, reject) => {
             glob(directory, (err, files) => {
                 if(err)reject(err)
@@ -12,10 +12,10 @@ export default class FileGatherer {
             });
         });
      }
-    
+
     produceBarreledNames(files: string[]): Array<string> {
-        let directories: string[] = [];
-        let outputFiles: string[] = [];
+        const directories: string[] = [];
+        const outputFiles: string[] = [];
 
         files.filter(file => fs.statSync(file).isDirectory()).forEach((directory) => {
             directories.push(this.produceBarellableName(directory,true));
@@ -33,9 +33,9 @@ export default class FileGatherer {
     }
 
     produceBarellableName(name: string, directory: boolean): string {
-        if(directory) {
+        if (directory) {
             return  "./" +  path.basename(name);
-        }else {
+        } else {
             return "./" + path.basename(name, ".ts");
         }
     }

@@ -54,6 +54,7 @@
     "@types/sinon": "^1.16.33",
     "mocha": "^2.3.3",
     "sinon": "^1.17.6",
+    "tslint": "^4.4.2",
     "typescript": "^2.1.5",
     "vscode": "^1.0.0"
   },

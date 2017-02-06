@@ -9,8 +9,8 @@ export default class ConfigurationService {
 
 
     getConfiguration(): Promise<Configuration> {
-        return this.getLintConfig().then((config: Array<string>) => {
-            if (config[0] === "true" && config[1] === "double") {
+        return this.getLintConfig().then((config: Array<any>) => {
+            if (config[0] === true && config[1] === "double") {
                 return new Configuration("\"");
             }
             return new Configuration("\'");
@@ -19,15 +19,15 @@ export default class ConfigurationService {
         });
     }
 
-    getLintConfig(): Promise<Array<string>> {
+    getLintConfig(): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
 
-            let quoteMarksConfig: Array<string> = [];
+            const quoteMarksConfig: Array<any> = [];
             this.getTsLintFile().then((matches: Array<string>) => {
                 if (matches.length === 1) {
-                    let tsLintConfig = JSON.parse(fs.readFileSync(matches[0]).toString());
+                    const tsLintConfig = JSON.parse(fs.readFileSync(matches[0]).toString());
                     try {
-                        let quoteRulesArray = tsLintConfig.rules.quotemark;
+                        const quoteRulesArray = tsLintConfig.rules.quotemark;
                         if (quoteRulesArray) {
                             resolve(quoteRulesArray);
                         }
@@ -45,10 +45,10 @@ export default class ConfigurationService {
     }
 
     private getTsLintFile(): Promise<Array<string>> {
-        let root = this.getRootPath();
+        const root = this.getRootPath();
         return new Promise((resolve, reject) => {
             glob(root + "/**/" + TSLINT_NAME, ((er, matches) => {
-                if(er) reject(er);
+                if (er) reject(er);
                 resolve(matches);
             }));
         });
