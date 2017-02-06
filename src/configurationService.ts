@@ -47,7 +47,7 @@ export default class ConfigurationService {
     private getTsLintFile(): Promise<Array<string>> {
         const root = this.getRootPath();
         return new Promise((resolve, reject) => {
-            glob(root + "/**/" + TSLINT_NAME, ((er, matches) => {
+            glob(root + "/**/" + TSLINT_NAME, {"ignore": ["**/node_modules/**/*"]}, ((er, matches) => {
                 if (er) reject(er);
                 resolve(matches);
             }));
