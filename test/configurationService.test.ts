@@ -27,7 +27,6 @@ suite("Configuration Service tests", () => {
             assert.equal(quoteConfig.quoteType, "\'");
             done();
         });
-
     });
 
     test("Given getLintConfig returns config with double quotes getConfiguration should return configuration with double quotes", (done) => {
@@ -36,7 +35,6 @@ suite("Configuration Service tests", () => {
             assert.equal(quoteConfig.quoteType, "\"");
             done();
         });
-
     });
 
     test("Given getLintConfig rejects promise should return configuration with single quotes", (done) => {
@@ -76,7 +74,6 @@ suite("Configuration Service tests", () => {
                 assert.equal(quoteConfig[1], "double");
                 done();
             });
-
         });
 
         test("Given tslint config exists but quotemark rule doesnt exist getLintConfig should reject promise", (done) => {
@@ -88,13 +85,13 @@ suite("Configuration Service tests", () => {
                     done();
                 });
         });
-        test("Given tslint config does not exist getLintConfig should reject promise", (done) => {
+        
+        test("Given tslint config does not exist getLintConfig should return empty array", (done) => {
             getTsLintFile.onFirstCall().returns(Promise.resolve([]));
-            configurationService.getLintConfig().then((quoteConfig: Array<string>) => {})
-                .catch(() => {
-                    done();
-                });
+            configurationService.getLintConfig().then((quoteConfig: Array<string>) => {
+                assert.equal(quoteConfig.length, 0);
+                done();
+            }); 
         });
-
     });
 });

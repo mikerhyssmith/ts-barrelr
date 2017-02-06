@@ -16,7 +16,7 @@ export default class ConfigurationService {
             return new Configuration("\'");
         }).catch(() => {
             return new Configuration("\'");
-        })
+        });
     }
 
     getLintConfig(): Promise<Array<string>> {
@@ -36,7 +36,7 @@ export default class ConfigurationService {
                     }
                 }
                 resolve(quoteMarksConfig);
-            })
+            });
         });
     }
 
@@ -50,8 +50,8 @@ export default class ConfigurationService {
             glob(root + "/**/" + TSLINT_NAME, ((er, matches) => {
                 if(er) reject(er);
                 resolve(matches);
-            }))
-        })
+            }));
+        });
     }
 }
 

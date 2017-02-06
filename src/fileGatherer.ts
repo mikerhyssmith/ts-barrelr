@@ -9,8 +9,8 @@ export default class FileGatherer {
                 if(err)reject(err)
                 else
                 resolve(this.produceBarreledNames(files));
-            })
-        })
+            });
+        });
      }
     
     produceBarreledNames(files: string[]): Array<string> {

@@ -9,14 +9,14 @@ export function activate(context: vscode.ExtensionContext) {
         barrelr.barrel(path.dirname(vscode.window.activeTextEditor.document.fileName))
         .catch(err => {
             vscode.window.showErrorMessage(err);
-        })
+        });
     });
 
     let barrelRecursive = vscode.commands.registerCommand('extension.recursiveBarrel', () => {
         barrelr.barrelRecursivey(path.dirname(vscode.window.activeTextEditor.document.fileName))
         .catch(err => {
             vscode.window.showErrorMessage(err);
-        })
+        });
     });
 
     context.subscriptions.push(barrel);
