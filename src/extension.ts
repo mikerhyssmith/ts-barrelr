@@ -5,6 +5,7 @@ import Barrelr from "./barrelr";
 
 export function activate(context: vscode.ExtensionContext) {
     const barrelr: Barrelr = new Barrelr();
+    
     const barrel = vscode.commands.registerCommand("extension.barrel", () => {
         barrelr.barrel(path.dirname(vscode.window.activeTextEditor.document.fileName))
         .catch(err => {

@@ -47,7 +47,6 @@ suite("Configuration Service tests", () => {
 
     suite("getConfiguration", () => {
         var configurationService: ConfigurationService;
-        var fsReadFileSync: Sinon.SinonStub;
         const tsLintWithQuoteRule = "{" +
             "\"rules\": {" +
             "\"quotemark\": [true, \"double\"]" +
@@ -55,18 +54,22 @@ suite("Configuration Service tests", () => {
             "}"
         const emptyTsLint = "{ }"
         var getTsLintFile: Sinon.SinonStub;
+        var fsReadFile: Sinon.SinonStub;
 
         suiteSetup(() => {
             configurationService = new ConfigurationService();
             getTsLintFile = Sinon.stub(configurationService, "getTsLintFile");
-            fsReadFileSync = Sinon.stub(fs, "readFileSync");
         });
         teardown(() => {
             getTsLintFile.reset();
+            fsReadFile.restore();
         });
+
         test("Given tslint config exists and quotemark rule exists getLintConfig should return quotemark array", (done) => {
-            getTsLintFile.onFirstCall().returns(Promise.resolve(["tslint.json"]));
-            fsReadFileSync.withArgs("tslint.json").returns(tsLintWithQuoteRule);
+            getTsLintFile.onFirstCall().returns(Promise.resolve([ vscode.Uri.file("tslint.json")]));
+            fsReadFile = Sinon.stub(fs, "readFile", function(path, callback) {
+                return callback(undefined, tsLintWithQuoteRule);
+            });
 
             configurationService.getLintConfig().then((quoteConfig: Array<any>) => {
                 assert.equal(quoteConfig.length, 2);
@@ -77,8 +80,10 @@ suite("Configuration Service tests", () => {
         });
 
         test("Given tslint config exists but quotemark rule doesnt exist getLintConfig should reject promise", (done) => {
-            getTsLintFile.onFirstCall().returns(Promise.resolve(["tslint.json"]));
-            fsReadFileSync.withArgs("tslint.json").returns(emptyTsLint);
+            getTsLintFile.onFirstCall().returns(Promise.resolve([vscode.Uri.file("tslint.json")]));
+            fsReadFile = Sinon.stub(fs, "readFile", function(path, callback) {
+                return callback(undefined, emptyTsLint);
+            });
 
             configurationService.getLintConfig().then((quoteConfig: Array<any>) => {})
                 .catch(() => {
@@ -91,7 +96,7 @@ suite("Configuration Service tests", () => {
             configurationService.getLintConfig().then((quoteConfig: Array<any>) => {
                 assert.equal(quoteConfig.length, 0);
                 done();
-            }); 
+            });
         });
     });
 });

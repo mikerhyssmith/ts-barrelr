@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 import * as glob from "glob";
 
 import { Configuration } from "./model";
@@ -23,17 +23,19 @@ export default class ConfigurationService {
         return new Promise((resolve, reject) => {
 
             const quoteMarksConfig: Array<any> = [];
-            this.getTsLintFile().then((matches: Array<string>) => {
+            this.getTsLintFile().then((matches: Array<vscode.Uri>) => {
                 if (matches.length === 1) {
-                    const tsLintConfig = JSON.parse(fs.readFileSync(matches[0]).toString());
-                    try {
-                        const quoteRulesArray = tsLintConfig.rules.quotemark;
-                        if (quoteRulesArray) {
-                            resolve(quoteRulesArray);
+                    fs.readFile(matches[0].fsPath, (err, data) => {
+                        try {
+                            const dataString = JSON.parse(data.toString());
+                            const quoteRulesArray = dataString.rules.quotemark;
+                            if (quoteRulesArray) {
+                                resolve(quoteRulesArray);
+                            }
+                        } catch (error) {
+                            reject("An error occured locating tsconfig, defaulting to single quotes.");
                         }
-                    } catch (error) {
-                        reject("An error occured locating tsconfig, defaulting to single quotes.");
-                    }
+                    });
                 }
                 resolve(quoteMarksConfig);
             });
@@ -44,13 +46,10 @@ export default class ConfigurationService {
         return vscode.workspace.rootPath;
     }
 
-    private getTsLintFile(): Promise<Array<string>> {
+    private getTsLintFile(): Thenable<Array<vscode.Uri>> {
         const root = this.getRootPath();
-        return new Promise((resolve, reject) => {
-            glob(root + "/**/" + TSLINT_NAME, {"ignore": ["**/node_modules/**/*"]}, ((er, matches) => {
-                if (er) reject(er);
-                resolve(matches);
-            }));
+        return vscode.workspace.findFiles(root + "/**/" + TSLINT_NAME, "**∕node_modules∕**", 1).then((value) => {
+            return value;
         });
     }
 }
