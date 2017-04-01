@@ -8,11 +8,13 @@
 
 ts-barrelr automates the production of index.ts barrel files.
 
-Ts-barrelr will produce an index.ts containing all files and folders within the folder containing the current file in the editor window.
+ts-barrelr will produce an index.ts containing all files and folders within the folder containing the current file open in the editor window.
 
-Running the barrelr with an existing index.ts will update it with any changes to files within the folder.
+Running barrelr where an index.ts exists will update it with any changes to files within the folder.
 
 The default keybinding to barrel is "ctrl-alt-b" for windows and linux users and "cmd-alt-b" for mac users.
+
+By default ts-barrelr will use single quotes as the default quotemark for imports in index.ts files. This can be changed to double quotes using the setting: **barrelr.useDoubleQuotes**
 
 
 ## Upcoming Features

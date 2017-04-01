@@ -31,7 +31,7 @@ export default class BarrelProducer {
 
     private getQuoteMark() {
         const config = vscode.workspace.getConfiguration("barrelr");
-        if (config.useDoubleQuotes) {
+        if (config["useDoubleQuotes"]) {
             return "\"";
         }
         return "'";

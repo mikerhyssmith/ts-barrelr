@@ -1,3 +1,11 @@
+## [0.3.0] - 2017-04-01
+### Added
+- Configuration option for specifying quote mark required.
+
+### Removed
+- Recursive barreling ability.
+- Quotemark type detected by using tslint.
+
 ## [0.2.0] - 2017-02-06
 ### Added
 - Recursive barreling ability.
