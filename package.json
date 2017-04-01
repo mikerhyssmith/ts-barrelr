@@ -2,7 +2,7 @@
     "name": "ts-barrelr",
     "displayName": "ts-barrelr",
     "description": "Barreler for typescript apps",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "publisher": "mikerhyssmith",
     "icon": "icon/barrelr.png",
     "repository": "https://github.com/mikerhyssmith/ts-barrelr",
@@ -40,7 +40,18 @@
                 "mac": "cmd+alt+shift+b",
                 "when": "editorTextFocus"
             }
-        ]
+        ],
+         "configuration": {
+            "type": "object",
+            "title": "Barrelr configuration",
+            "properties": {
+                "barrelr.useDoubleQuotes": {
+                    "type": "boolean",  
+                    "default": false,
+                    "description": "Use double quotes for imports in barrels."
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
@@ -59,7 +70,5 @@
         "vscode": "^1.0.0"
     },
     "dependencies": {
-        "@types/glob": "^5.0.30",
-        "glob": "^7.1.1"
     }
 }

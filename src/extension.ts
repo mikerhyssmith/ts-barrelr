@@ -5,7 +5,7 @@ import Barrelr from "./barrelr";
 
 export function activate(context: vscode.ExtensionContext) {
     const barrelr: Barrelr = new Barrelr();
-    
+    // Move tsconfig search here
     const barrel = vscode.commands.registerCommand("extension.barrel", () => {
         barrelr.barrel(path.dirname(vscode.window.activeTextEditor.document.fileName))
         .catch(err => {
@@ -22,6 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(barrel);
     context.subscriptions.push(barrelRecursive);
+
 }
 
 export function deactivate() {}

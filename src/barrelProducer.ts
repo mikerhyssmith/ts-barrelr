@@ -1,10 +1,10 @@
 import * as fs from "fs";
-import { Configuration } from "./model";
+import * as vscode from "vscode";
 
 /*To be refactored */
 export default class BarrelProducer {
 
-    constructor(private directory: string, private fileNames: Array<string>, private config: Configuration) { }
+    constructor(private directory: string, private fileNames: Array<string>) { }
 
     produceBarrel(): Promise<string> {
         const exportedFileNames = this.produceExports(this.fileNames);
@@ -25,8 +25,16 @@ export default class BarrelProducer {
     }
 
     addExport(fileName: string) {
-        const quotemark = this.config.quoteType;
+        const quotemark = this.getQuoteMark();
         return "export * from " + quotemark + fileName + quotemark + ";\n";
+    }
+
+    private getQuoteMark() {
+        const config = vscode.workspace.getConfiguration("barrelr");
+        if (config.useDoubleQuotes) {
+            return "\"";
+        }
+        return "'";
     }
 }
 

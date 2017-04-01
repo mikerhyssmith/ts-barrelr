@@ -1,32 +1,38 @@
 import * as fs from "fs";
 import * as path from "path";
-import * as glob from "glob";
+import * as vscode from "vscode";
 
 export default class FileGatherer {
      gather(directory: string): Promise<Array<string>> {
         return new Promise((resolve, reject) => {
-            glob(directory, (err, files) => {
-                if(err)reject(err)
+            fs.readdir(directory, (err, files) => {
+                if (err)reject(err)
                 else
-                resolve(this.produceBarreledNames(files));
-            });
-        });
+                resolve(this.produceBarreledNames(files, directory));
+
+            })
+        })
      }
 
-    produceBarreledNames(files: string[]): Array<string> {
+    produceBarreledNames(files: string[], directory): Array<string> {
         const directories: string[] = [];
         const outputFiles: string[] = [];
 
-        files.filter(file => fs.statSync(file).isDirectory()).forEach((directory) => {
-            directories.push(this.produceBarellableName(directory,true));
+        // Make this async
+        files.filter(file => fs.statSync(directory + "/" + file).isDirectory())
+            .forEach((directory) => {
+                directories.push(this.produceBarellableName(directory, true));
         });
-        files.filter(file => fs.statSync(file).isFile())
-            .filter(file => !file.includes("index.ts"))
+
+        // Make this async
+        files.filter(file => fs.statSync(directory + "/" + file).isFile())
+            .filter(file => file !== "index.ts")
                 .filter(file => path.extname(file) === ".ts")
                     .filter(file => !file.includes("spec."))
                         .filter(file => !file.includes("test."))
+                            .filter(file => !file.includes("e2e."))
                     .forEach((file) => {
-                        outputFiles.push(this.produceBarellableName(file,false));
+                        outputFiles.push(this.produceBarellableName(file, false));
         });
 
         return directories.concat(outputFiles);
@@ -41,5 +47,3 @@ export default class FileGatherer {
     }
 
 }
-
-
