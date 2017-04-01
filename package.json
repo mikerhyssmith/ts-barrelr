@@ -21,10 +21,6 @@
             {
                 "command": "extension.barrel",
                 "title": "Barrel"
-            },
-            {
-                "command": "extension.recursiveBarrel",
-                "title": "Barrel Recursively"
             }
         ],
         "keybindings": [
@@ -32,12 +28,6 @@
                 "command": "extension.barrel",
                 "key": "ctrl+alt+b",
                 "mac": "cmd+alt+b",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "extension.recursiveBarrel",
-                "key": "ctrl+alt+shift+b",
-                "mac": "cmd+alt+shift+b",
                 "when": "editorTextFocus"
             }
         ],
