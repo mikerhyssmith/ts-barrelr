@@ -50,5 +50,3 @@ export default class FileGatherer {
     }
 
 }
-
-// spec test e2e
