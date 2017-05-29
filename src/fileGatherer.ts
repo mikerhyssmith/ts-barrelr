@@ -28,9 +28,7 @@ export default class FileGatherer {
         files.filter(file => fs.statSync(directory + "/" + file).isFile())
             .filter(file => file !== "index.ts")
                 .filter(file => path.extname(file) === ".ts")
-                    .filter(file => !file.includes("spec."))
-                        .filter(file => !file.includes("test."))
-                            .filter(file => !file.includes("e2e."))
+                    .filter(file => !file.match(this.getExcludeRegEx()))
                     .forEach((file) => {
                         outputFiles.push(this.produceBarellableName(file, false));
         });
@@ -44,6 +42,11 @@ export default class FileGatherer {
         } else {
             return "./" + path.basename(name, ".ts");
         }
+    }
+
+    private getExcludeRegEx() {
+        const config = vscode.workspace.getConfiguration("barrelr");
+        return config["excludeFileRegex"];
     }
 
 }

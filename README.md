@@ -14,7 +14,14 @@ Running barrelr where an index.ts exists will update it with any changes to file
 
 The default keybinding to barrel is "ctrl-alt-b" for windows and linux users and "cmd-alt-b" for mac users.
 
+
+## Configuration
+
+### Quote Marks:
 By default ts-barrelr will use single quotes as the default quotemark for imports in index.ts files. This can be changed to double quotes using the setting: **barrelr.useDoubleQuotes**
+
+### Files to exclude:
+By default ts-barrelr will exclude any files containing .spec., .e2e. or .test. This can be changed as a regular expression by changing the setting:  **barrelr.excludeFileRegex**
 
 
 ## Upcoming Features

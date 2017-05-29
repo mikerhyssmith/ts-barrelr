@@ -1,3 +1,6 @@
+## [0.4.0] - 2017-04-01
+### Added
+- Configuration option for specifying regular expression of files and folders to not include in barrel.
 ## [0.3.0] - 2017-04-01
 ### Added
 - Configuration option for specifying quote mark required.
