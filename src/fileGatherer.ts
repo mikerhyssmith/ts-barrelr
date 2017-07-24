@@ -21,7 +21,7 @@ export default class FileGatherer {
         // Make this async
         files.filter(file => fs.statSync(directory + "/" + file).isDirectory())
             .forEach((directory) => {
-                directories.push(this.produceBarellableName(directory, true));
+                directories.push(this.produceBarellableName(directory + '/', true));
         });
 
         // Make this async
