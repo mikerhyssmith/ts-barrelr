@@ -25,12 +25,12 @@ export default class FileGatherer {
         });
 
         // Make this async
-        files.filter(file => fs.statSync(directory + "/" + file).isFile())
-            .filter(file => file !== "index.ts")
-                .filter(file => path.extname(file) === ".ts")
-                    .filter(file => !file.match(this.getExcludeRegEx()))
-                    .forEach((file) => {
-                        outputFiles.push(this.produceBarellableName(file, false));
+        files.filter(file => fs.statSync(directory + "/" + file).isFile()
+            && file !== "index.ts"
+            && path.extname(file).match(this.getExtensionsRegEx())
+            && !file.match(this.getExcludeRegEx())
+        ).forEach((file) => {
+            outputFiles.push(this.produceBarellableName(file, false));
         });
 
         return directories.concat(outputFiles);
@@ -44,9 +44,14 @@ export default class FileGatherer {
         }
     }
 
-    private getExcludeRegEx() {
+    private getExcludeRegEx(): string {
         const config = vscode.workspace.getConfiguration("barrelr");
         return config["excludeFileRegex"];
+    }
+
+    private getExtensionsRegEx(): string {
+        const config = vscode.workspace.getConfiguration("barrelr");
+        return config["fileExtensionRegex"];
     }
 
 }
