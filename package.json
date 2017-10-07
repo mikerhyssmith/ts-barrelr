@@ -44,6 +44,11 @@
                     "type": "string",
                     "default": "(\\.spec\\.|\\.test\\.|\\.e2e\\.)",
                     "description": "Regular expression for excluding files or folders from barrels."
+                },
+                "barrelr.fileExtensionRegex": {
+                    "type": "string",
+                    "default": "\\.tsx?$",
+                    "description": "Regular expression for file extensions that will be included in barrels."
                 }
             }
         }

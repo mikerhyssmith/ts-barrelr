@@ -7,7 +7,8 @@ import FileGatherer from "../src/fileGatherer";
 suite("File Gatherer Tests", () => {
     let fileGatherer: FileGatherer
     let fsStatSync: Sinon.SinonStub;
-    let getExcludeRegEx: Sinon.SinonStub;;
+    let getExcludeRegEx: Sinon.SinonStub;
+    let getExtensionsRegEx: Sinon.SinonStub;
     const directoryObject = { isDirectory() {return true}, isFile() {return false}}
     const fileObject = { isDirectory() {return false}, isFile() {return true}}
 
@@ -15,6 +16,8 @@ suite("File Gatherer Tests", () => {
         fileGatherer = new FileGatherer();
         getExcludeRegEx = Sinon.stub(fileGatherer, "getExcludeRegEx");
         getExcludeRegEx.returns("(\\.spec\\.|\\.test\\.|\\.e2e\\.)");
+        getExtensionsRegEx = Sinon.stub(fileGatherer, "getExtensionsRegEx");
+        getExtensionsRegEx.returns("\\.tsx?$");
         fsStatSync = Sinon.stub(fs, "statSync");
         fsStatSync.withArgs("C:/Mike/folder").returns(directoryObject);
         fsStatSync.withArgs("C:/Mike/secondFolder").returns(directoryObject);
@@ -25,6 +28,7 @@ suite("File Gatherer Tests", () => {
         fsStatSync.withArgs("C:/Mike/image.png").returns(fileObject);
         fsStatSync.withArgs("C:/Mike/file.test.ts").returns(fileObject);
         fsStatSync.withArgs("C:/Mike/file.spec.ts").returns(fileObject);
+        fsStatSync.withArgs("C:/Mike/file.abc").returns(fileObject);
     })
 
     test("Given Directory, produce barellable name should produce correct format", () => {
@@ -66,6 +70,13 @@ suite("File Gatherer Tests", () => {
     test("Given list of files including spec.ts files, produceBarreledNames should produce correct array of files and folders without spec files", () => {
         const returnedFileNames = fileGatherer.produceBarreledNames(["file.ts", "file.spec.ts"], "C:/Mike");
         const expectedFileNames = ["./file"];
+        assert.deepStrictEqual(returnedFileNames, expectedFileNames);
+    });
+
+    test("Given list of files with various extensions, produceBarreledNames uses fileExtensionRegex config setting to produce array of files with matching extensions", () => {
+        getExtensionsRegEx.returns("\\.abc$");
+        const returnedFileNames = fileGatherer.produceBarreledNames(["file.ts", "secondFile.ts", "file.abc"], "C:/Mike");
+        const expectedFileNames = ["./file.abc"];
         assert.deepStrictEqual(returnedFileNames, expectedFileNames);
     });
 });
