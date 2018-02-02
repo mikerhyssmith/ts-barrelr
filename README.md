@@ -1,6 +1,7 @@
-# ts-barrelr README
-[![VSCodeVersion](http://vsmarketplacebadge.apphb.com/version/mikerhyssmith.ts-barrelr.svg)](https://marketplace.visualstudio.com/items?itemName=mikerhyssmith.ts-barrelr)
-[![VSCodeInstalls](http://vsmarketplacebadge.apphb.com/installs/mikerhyssmith.ts-barrelr.svg)](https://marketplace.visualstudio.com/items?itemName=mikerhyssmith.ts-barrelr)
+# ts-barrelr
+[![VSCodeVersion](https://vsmarketplacebadge.apphb.com/version/mikerhyssmith.ts-barrelr.svg)](https://marketplace.visualstudio.com/items?itemName=mikerhyssmith.ts-barrelr)
+[![VSCodeInstalls](https://vsmarketplacebadge.apphb.com/installs/mikerhyssmith.ts-barrelr.svg)](https://marketplace.visualstudio.com/items?itemName=mikerhyssmith.ts-barrelr)
+[![TravisStatus](https://travis-ci.org/mikerhyssmith/ts-barrelr.svg?branch=master)](https://travis-ci.org/mikerhyssmith/ts-barrelr)
 
 
 
@@ -17,14 +18,11 @@ The default keybinding to barrel is "ctrl-alt-b" for windows and linux users and
 
 ## Configuration
 
+### Included files:
+By default barrelr will include any files with a `.ts` or `.tsx` extension but this can be configured via the setting **barrelr.fileExtensionRegex**
+
 ### Quote Marks:
 By default ts-barrelr will use single quotes as the default quotemark for imports in index.ts files. This can be changed to double quotes using the setting: **barrelr.useDoubleQuotes**
 
 ### Files to exclude:
 By default ts-barrelr will exclude any files containing .spec., .e2e. or .test. This can be changed as a regular expression by changing the setting:  **barrelr.excludeFileRegex**
-
-
-## Upcoming Features
-Recursive barreling - from a directory barrelr will produce index.ts files for the current directory and all sub directories.
-
-Excluding files - barrelr will allow you to specify file types to exclude from the barrel for example test files (.spec.ts, .test.ts).
