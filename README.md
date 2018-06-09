@@ -11,9 +11,18 @@ ts-barrelr automates the production of index.ts barrel files.
 
 ts-barrelr will produce an index.ts containing all files and folders within the folder containing the current file open in the editor window.
 
-Running barrelr where an index.ts exists will update it with any changes to files within the folder.
+There are two ways to trigger barrelr:
 
-The default keybinding to barrel is "ctrl-alt-b" for windows and linux users and "cmd-alt-b" for mac users.
+- Select the barrel action from the actions menu or use the keybinds  ```ctrl-alt-b``` / ```cmd-alt-b``` with a file open to create an `index.ts` in the folder of the currently open file:
+
+![Barrel action](images/barrelr.gif)
+
+- Right click on a folder and select 'Barrel' to create an index.ts file for that folder.
+    ![Context menu barrel](images/context-menu.png)
+
+
+
+Running the command again will update the barrel with any new or changed files.
 
 
 ## Configuration

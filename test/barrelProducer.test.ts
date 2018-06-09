@@ -18,14 +18,14 @@ suite("Barrel Producer Tests", () => {
         getQuoteMark.returns("'");
         const returnedName = barrelProducer.addExport("./file");
 
-        assert.equal(returnedName, "export * from \'./file\';\n");
+        assert.equal(returnedName, "export * from \'./file\';\r\n");
     });
 
     test("Given file name and double quote configuration add export should add export with double quote ", () => {
         getQuoteMark.returns("\"");
         const returnedName = barrelProducer.addExport("./file");
 
-        assert.equal(returnedName, "export * from \"./file\";\n");
+        assert.equal(returnedName, "export * from \"./file\";\r\n");
     });
 
 
@@ -33,6 +33,6 @@ suite("Barrel Producer Tests", () => {
         getQuoteMark.returns("\"");
         const returnedNames = barrelProducer.produceExports(["./file", "./folder", "./secondFolder"]);
 
-        assert.deepStrictEqual(returnedNames, ["export * from \"./file\";\n", "export * from \"./folder\";\n", "export * from \"./secondFolder\";\n"]);
+        assert.deepStrictEqual(returnedNames, ["export * from \"./file\";\r\n", "export * from \"./folder\";\r\n", "export * from \"./secondFolder\";\r\n"]);
     });
 });
