@@ -1,3 +1,10 @@
+## [1.0.0] - 2018-06-09
+### Added
+- Ability to barrel from the explorer context menu
+
+### Changed
+- Cleaned up lots of unused code 🙌
+
 ## [0.4.0] - 2017-04-01
 ### Added
 - Configuration option for specifying regular expression of files and folders to not include in barrel.
