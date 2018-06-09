@@ -2,7 +2,7 @@
   "name": "ts-barrelr",
   "displayName": "ts-barrelr",
   "description": "Barreler for typescript apps",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "publisher": "mikerhyssmith",
   "icon": "https://github.com/mikerhyssmith/ts-barrelr/blob/master/icon/barrelr.png",
   "repository": "https://github.com/mikerhyssmith/ts-barrelr",
@@ -32,11 +32,13 @@
       }
     ],
     "menus": {
-        "explorer/context": [{
-            "when": "explorerResourceIsFolder",
-            "command": "extension.barrel",
-            "group": "7_modification"
-        }]
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "extension.barrel",
+          "group": "7_modification"
+        }
+      ]
     },
     "configuration": {
       "type": "object",
