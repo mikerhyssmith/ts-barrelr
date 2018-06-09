@@ -31,6 +31,13 @@
         "when": "editorTextFocus"
       }
     ],
+    "menus": {
+        "explorer/context": [{
+            "when": "explorerResourceIsFolder",
+            "command": "extension.barrel",
+            "group": "7_modification"
+        }]
+    },
     "configuration": {
       "type": "object",
       "title": "Barrelr configuration",

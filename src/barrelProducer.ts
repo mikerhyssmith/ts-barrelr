@@ -1,7 +1,6 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
 
-/*To be refactored */
 export default class BarrelProducer {
 
     constructor(private directory: string, private fileNames: Array<string>) { }
