@@ -1,3 +1,7 @@
+## [1.0.1] - 2018-06-09
+### Added
+- Fix issue when barreling from explore menu
+
 ## [1.0.0] - 2018-06-09
 ### Added
 - Ability to barrel from the explorer context menu
