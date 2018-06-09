@@ -25,7 +25,7 @@ export default class BarrelProducer {
 
     addExport(fileName: string) {
         const quotemark = this.getQuoteMark();
-        return "export * from " + quotemark + fileName + quotemark + ";\n";
+        return "export * from " + quotemark + fileName + quotemark + ";\r\n";
     }
 
     private getQuoteMark() {
