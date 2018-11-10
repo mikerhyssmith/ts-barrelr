@@ -33,5 +33,8 @@ By default barrelr will include any files with a `.ts` or `.tsx` extension but t
 ### Quote Marks:
 By default ts-barrelr will use single quotes as the default quotemark for imports in index.ts files. This can be changed to double quotes using the setting: **barrelr.useDoubleQuotes**
 
+### Semi-colons:
+By default ts-barrelr will add semi colons at the end of each line, if you want to disable this you can use the setting: **barrelr.useSemiColons**
+
 ### Files to exclude:
 By default ts-barrelr will exclude any files containing .spec., .e2e. or .test. This can be changed as a regular expression by changing the setting:  **barrelr.excludeFileRegex**
