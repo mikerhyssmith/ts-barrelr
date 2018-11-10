@@ -3,6 +3,8 @@ import * as path from "path";
 import * as vscode from "vscode";
 
 export default class FileGatherer {
+  config = vscode.workspace.getConfiguration("barrelr");
+
   gather(directory: string): Promise<Array<string>> {
     return new Promise((resolve, reject) => {
       fs.readdir(directory, (err, files) => {
@@ -14,18 +16,18 @@ export default class FileGatherer {
     });
   }
 
-  produceBarreledNames(files: string[], directory): Array<string> {
+  produceBarreledNames(files: string[], directory: string): Array<string> {
     const directories: string[] = [];
     const outputFiles: string[] = [];
 
     // Make this async
-    files.filter(file => fs.statSync(directory + "/" + file).isDirectory())
+    files.filter(file => fs.statSync(`${directory}/${file}`).isDirectory())
       .forEach((directory) => {
         directories.push(this.produceBarellableName(directory, true));
       });
 
     // Make this async
-    files.filter(file => fs.statSync(directory + "/" + file).isFile()
+    files.filter(file => fs.statSync(`${directory}/${file}`).isFile()
       && file !== "index.ts"
       && path.extname(file).match(this.getExtensionsRegEx())
       && !file.match(this.getExcludeRegEx())
@@ -38,20 +40,18 @@ export default class FileGatherer {
 
   produceBarellableName(name: string, directory: boolean): string {
     if (directory) {
-      return "./" + path.basename(name);
+      return `./${path.basename(name)}`;
     } else {
-      return "./" + path.basename(name, ".ts");
+      return `./${path.basename(name, ".ts")}`;
     }
   }
 
   private getExcludeRegEx(): string {
-    const config = vscode.workspace.getConfiguration("barrelr");
-    return config["excludeFileRegex"];
+    return this.config["excludeFileRegex"];
   }
 
   private getExtensionsRegEx(): string {
-    const config = vscode.workspace.getConfiguration("barrelr");
-    return config["fileExtensionRegex"];
+    return this.config["fileExtensionRegex"];
   }
 
 }

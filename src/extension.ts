@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import * as path from "path";
 import Barrelr from "./barrelr";
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext): void {
   const barrelr: Barrelr = new Barrelr();
 
   const barrel = vscode.commands.registerCommand("extension.barrel", (folder) => {

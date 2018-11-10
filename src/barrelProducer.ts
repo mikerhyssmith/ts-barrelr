@@ -25,20 +25,20 @@ export default class BarrelProducer {
     });
   }
 
-  addExport(fileName: string) {
+  addExport(fileName: string): string {
     const quotemark = this.getQuoteMark();
     const semiColon = this.getSemiColon();
     return `export * from ${quotemark}${fileName}${quotemark}${semiColon}\r\n`;
   }
 
-  private getQuoteMark() {
+  private getQuoteMark(): string {
     if (this.config.useDoubleQuotes) {
       return "\"";
     }
     return "'";
   }
 
-  private getSemiColon() {
+  private getSemiColon(): string {
     if (this.config.useSemiColons) {
       return ";";
     }
