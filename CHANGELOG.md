@@ -1,4 +1,11 @@
 ## [1.1.0] - 2018-06-09
+### Added
+- Config option for enabling or disabling semi colon line endings
+
+### Changed
+- Cleaned up some files.
+
+## [1.1.0] - 2018-06-09
 ### Changed
 - Use CRLF as line endings
 - Add more details to readme
