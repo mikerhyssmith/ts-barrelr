@@ -3,6 +3,8 @@ import * as vscode from "vscode";
 
 export default class BarrelProducer {
 
+    config = vscode.workspace.getConfiguration("barrelr");
+
     constructor(private directory: string, private fileNames: Array<string>) { }
 
     produceBarrel(): Promise<string> {
@@ -25,15 +27,23 @@ export default class BarrelProducer {
 
     addExport(fileName: string) {
         const quotemark = this.getQuoteMark();
-        return "export * from " + quotemark + fileName + quotemark + ";\r\n";
+        const semiColon = this.getSemiColon();
+        return `export * from ${quotemark}${fileName}${quotemark}${semiColon}\r\n`;
     }
 
     private getQuoteMark() {
-        const config = vscode.workspace.getConfiguration("barrelr");
-        if (config["useDoubleQuotes"]) {
+        if (this.config.useDoubleQuotes) {
             return "\"";
         }
         return "'";
+    }
+
+    private getSemiColon() {
+        if(this.config.useSemiColons) {
+            return ";";
+        }
+
+        return "";
     }
 }
 

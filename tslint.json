@@ -6,7 +6,8 @@
             "check-space"
         ],
         "indent": [true,
-            "spaces"
+            "spaces",
+            2
         ],
         "linebreak-style": [true, "CRLF"],
         "one-line": [true,
@@ -18,7 +19,7 @@
             "double",
             "avoid-escape"
         ],
-        "semicolon": [true, "ignore-bound-class-methods"],
+        "semicolon": [true, "always"],
         "whitespace": [true,
             "check-branch",
             "check-decl",

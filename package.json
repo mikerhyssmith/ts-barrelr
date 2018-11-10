@@ -49,6 +49,11 @@
           "default": false,
           "description": "Use double quotes for imports in barrels."
         },
+        "barrelr.useSemiColons": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use semi colons at the end of each import."
+        },
         "barrelr.excludeFileRegex": {
           "type": "string",
           "default": "(\\.spec\\.|\\.test\\.|\\.e2e\\.)",
