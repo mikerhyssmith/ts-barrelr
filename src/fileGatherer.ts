@@ -29,7 +29,7 @@ export default class FileGatherer {
     // Make this async
     files.filter(file => fs.statSync(`${directory}/${file}`).isFile()
       && file !== "index.ts"
-      && path.extname(file).match(this.getExtensionsRegEx())
+      && path.extname(file).match(new RegExp(`${this.getExtensionsRegEx()}`))
       && !file.match(this.getExcludeRegEx())
     ).forEach((file) => {
       outputFiles.push(this.produceBarellableName(file, false));
@@ -42,7 +42,8 @@ export default class FileGatherer {
     if (directory) {
       return `./${path.basename(name)}`;
     } else {
-      return `./${path.basename(name, ".ts")}`;
+      const regEx = new RegExp(`${this.getExtensionsRegEx()}`);
+      return `./${path.basename(name.replace(regEx, ""))}`;
     }
   }
 

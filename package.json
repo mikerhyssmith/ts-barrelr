@@ -61,7 +61,7 @@
         },
         "barrelr.fileExtensionRegex": {
           "type": "string",
-          "default": "\\.tsx?$",
+          "default": ".tsx?$",
           "description": "Regular expression for file extensions that will be included in barrels."
         }
       }

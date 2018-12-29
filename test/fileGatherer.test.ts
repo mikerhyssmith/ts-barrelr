@@ -17,7 +17,7 @@ suite("File Gatherer Tests", () => {
     getExcludeRegEx = Sinon.stub(fileGatherer, "getExcludeRegEx");
     getExcludeRegEx.returns("(\\.spec\\.|\\.test\\.|\\.e2e\\.)");
     getExtensionsRegEx = Sinon.stub(fileGatherer, "getExtensionsRegEx");
-    getExtensionsRegEx.returns("\\.tsx?$");
+    getExtensionsRegEx.returns(".tsx?$");
     fsStatSync = Sinon.stub(fs, "statSync");
     fsStatSync.withArgs("C:/Mike/folder").returns(directoryObject);
     fsStatSync.withArgs("C:/Mike/secondFolder").returns(directoryObject);
@@ -74,9 +74,9 @@ suite("File Gatherer Tests", () => {
   });
 
   test("Given list of files with various extensions, produceBarreledNames uses fileExtensionRegex config setting to produce array of files with matching extensions", () => {
-    getExtensionsRegEx.returns("\\.abc$");
+    getExtensionsRegEx.returns(".abc$");
     const returnedFileNames = fileGatherer.produceBarreledNames(["file.ts", "secondFile.ts", "file.abc"], "C:/Mike");
-    const expectedFileNames = ["./file.abc"];
+    const expectedFileNames = ["./file"];
     assert.deepStrictEqual(returnedFileNames, expectedFileNames);
   });
 });
