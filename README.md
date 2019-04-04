@@ -36,5 +36,8 @@ By default ts-barrelr will use single quotes as the default quotemark for import
 ### Semi-colons:
 By default ts-barrelr will add semi colons at the end of each line, if you want to disable this you can use the setting: **barrelr.useSemiColons**
 
+### Line ending:
+By default ts-barrelr will use Windows style line endings `CRLF`, if you want to use Linux style use `LF`: **barrelr.lineEnding**
+
 ### Files to exclude:
 By default ts-barrelr will exclude any files containing .spec., .e2e. or .test. This can be changed as a regular expression by changing the setting:  **barrelr.excludeFileRegex**

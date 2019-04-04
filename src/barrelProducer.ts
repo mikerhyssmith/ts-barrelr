@@ -28,7 +28,8 @@ export default class BarrelProducer {
   addExport(fileName: string): string {
     const quotemark = this.getQuoteMark();
     const semiColon = this.getSemiColon();
-    return `export * from ${quotemark}${fileName}${quotemark}${semiColon}\r\n`;
+    const lineEnding = this.getLineEnding()
+    return `export * from ${quotemark}${fileName}${quotemark}${semiColon}${lineEnding}`;
   }
 
   private getQuoteMark(): string {
@@ -44,6 +45,14 @@ export default class BarrelProducer {
     }
 
     return "";
+  }
+
+  private getLineEnding(): string {
+    const setting = this.config.lineEnding || "CRLF";
+    if(setting === "LF") {
+      return "\n";
+    }
+    return "\r\n";
   }
 }
 
