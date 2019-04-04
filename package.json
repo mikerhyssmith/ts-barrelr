@@ -56,7 +56,7 @@
         },
         "barrelr.lineEnding": {
           "type": "string",
-          "enum": ["LF", "CRLF"],
+          "enum": ["CRLF", "LF"],
           "default": "CRLF",
           "description": "Select line ending to use"
         },
