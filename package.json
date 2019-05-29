@@ -54,6 +54,12 @@
           "default": true,
           "description": "Use semi colons at the end of each import."
         },
+        "barrelr.lineEnding": {
+          "type": "string",
+          "enum": ["CRLF", "LF"],
+          "default": "CRLF",
+          "description": "Select line ending to use"
+        },
         "barrelr.excludeFileRegex": {
           "type": "string",
           "default": "(\\.spec\\.|\\.test\\.|\\.e2e\\.)",

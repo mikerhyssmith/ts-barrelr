@@ -8,16 +8,19 @@ suite("Barrel Producer Tests", () => {
   let barrelProducer: BarrelProducer;
   let getQuoteMark: Sinon.SinonStub;
   let getSemiColon: Sinon.SinonStub;
+  let getLineEnding: Sinon.SinonStub;
 
   suiteSetup(() => {
     barrelProducer = new BarrelProducer("./", []);
     getQuoteMark = Sinon.stub(barrelProducer, "getQuoteMark");
     getSemiColon = Sinon.stub(barrelProducer, "getSemiColon");
+    getLineEnding = Sinon.stub(barrelProducer, "getLineEnding");
   });
 
   setup(() => {
     getSemiColon.returns(";");
     getQuoteMark.returns("\"");
+    getLineEnding.returns("\r\n");
   });
 
 
@@ -45,5 +48,12 @@ suite("Barrel Producer Tests", () => {
     const returnedName = barrelProducer.addExport("./file");
 
     assert.equal(returnedName, "export * from \"./file\"\r\n");
+  });
+
+  test("Given file name and line ending set to LF should export non CRLF line ending", () => {
+    getLineEnding.returns("\n");
+    const returnedName = barrelProducer.addExport("./file");
+
+    assert.equal(returnedName, "export * from \"./file\";\n");
   });
 });
