@@ -14,9 +14,9 @@ suite("File Gatherer Tests", () => {
 
   suiteSetup(() => {
     fileGatherer = new FileGatherer();
-    getExcludeRegEx = Sinon.stub(fileGatherer, "getExcludeRegEx");
+    getExcludeRegEx = Sinon.stub(fileGatherer as any, "getExcludeRegEx");
     getExcludeRegEx.returns("(\\.spec\\.|\\.test\\.|\\.e2e\\.)");
-    getExtensionsRegEx = Sinon.stub(fileGatherer, "getExtensionsRegEx");
+    getExtensionsRegEx = Sinon.stub(fileGatherer as any, "getExtensionsRegEx");
     getExtensionsRegEx.returns(".tsx?$");
     fsStatSync = Sinon.stub(fs, "statSync");
     fsStatSync.withArgs("C:/Mike/folder").returns(directoryObject);
