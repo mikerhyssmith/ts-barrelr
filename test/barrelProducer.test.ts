@@ -12,9 +12,9 @@ suite("Barrel Producer Tests", () => {
 
   suiteSetup(() => {
     barrelProducer = new BarrelProducer("./", []);
-    getQuoteMark = Sinon.stub(barrelProducer, "getQuoteMark");
-    getSemiColon = Sinon.stub(barrelProducer, "getSemiColon");
-    getLineEnding = Sinon.stub(barrelProducer, "getLineEnding");
+    getQuoteMark = Sinon.stub(barrelProducer as any, "getQuoteMark");
+    getSemiColon = Sinon.stub(barrelProducer as any, "getSemiColon");
+    getLineEnding = Sinon.stub(barrelProducer as any, "getLineEnding");
   });
 
   setup(() => {
