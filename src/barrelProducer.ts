@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 export default class BarrelProducer {
 
   config = vscode.workspace.getConfiguration("barrelr");
+  denoConfig = vscode.workspace.getConfiguration("deno");
 
   constructor(private directory: string, private fileNames: Array<string>) { }
 
@@ -17,8 +18,10 @@ export default class BarrelProducer {
   }
 
   writeFiles(exportedFileNames: Array<string>, directory: string): Promise<string> {
+    const fileName = this.getPlatform() === "deno" ? "/mod.ts" : "/index.ts";
+
     return new Promise((resolve, reject) => {
-      fs.writeFile(directory + "/index.ts", exportedFileNames.join(""), (err) => {
+      fs.writeFile(directory + fileName, exportedFileNames.join(""), (err) => {
         if (err) reject(err);
         else resolve("Barrel written");
       });
@@ -26,10 +29,11 @@ export default class BarrelProducer {
   }
 
   addExport(fileName: string): string {
+    const fileExtension = this.getPlatform() === "deno" ? ".ts" : "";
     const quotemark = this.getQuoteMark();
     const semiColon = this.getSemiColon();
     const lineEnding = this.getLineEnding()
-    return `export * from ${quotemark}${fileName}${quotemark}${semiColon}${lineEnding}`;
+    return `export * from ${quotemark}${fileName}${fileExtension}${quotemark}${semiColon}${lineEnding}`;
   }
 
   private getQuoteMark(): string {
@@ -53,6 +57,13 @@ export default class BarrelProducer {
       return "\n";
     }
     return "\r\n";
+  }
+
+  private getPlatform(): 'deno' | 'node' {
+    if (this.denoConfig?.get("enabled")) {
+      return 'deno';
+    }
+    return 'node';
   }
 }
 

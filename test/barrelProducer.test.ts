@@ -9,18 +9,21 @@ suite("Barrel Producer Tests", () => {
   let getQuoteMark: Sinon.SinonStub;
   let getSemiColon: Sinon.SinonStub;
   let getLineEnding: Sinon.SinonStub;
+  let getPlatform: Sinon.SinonStub;
 
   suiteSetup(() => {
     barrelProducer = new BarrelProducer("./", []);
     getQuoteMark = Sinon.stub(barrelProducer as any, "getQuoteMark");
     getSemiColon = Sinon.stub(barrelProducer as any, "getSemiColon");
     getLineEnding = Sinon.stub(barrelProducer as any, "getLineEnding");
+    getPlatform = Sinon.stub(barrelProducer as any, "getPlatform");
   });
 
   setup(() => {
     getSemiColon.returns(";");
     getQuoteMark.returns("\"");
     getLineEnding.returns("\r\n");
+    getPlatform.returns("node");
   });
 
 
@@ -56,4 +59,13 @@ suite("Barrel Producer Tests", () => {
 
     assert.equal(returnedName, "export * from \"./file\";\n");
   });
+
+  suite("Deno Platform", () => {
+    test("Given file name and double quote configuration add export should add export with double quote and a file extension", () => {
+      getPlatform.returns("deno");
+      const returnedName = barrelProducer.addExport("./file");
+  
+      assert.equal(returnedName, "export * from \"./file.ts\";\r\n");
+    });
+  })
 });
