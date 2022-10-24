@@ -60,7 +60,6 @@
             "CRLF",
             "LF"
           ],
-          "default": "CRLF",
           "description": "Select line ending to use"
         },
         "barrelr.excludeFileRegex": {

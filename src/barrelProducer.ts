@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
+import { EOL } from "os";
 
 export default class BarrelProducer {
 
@@ -48,11 +49,13 @@ export default class BarrelProducer {
   }
 
   private getLineEnding(): string {
-    const setting = this.config.lineEnding || "CRLF";
-    if(setting === "LF") {
-      return "\n";
+    if(this.config.lineEnding){
+      if(this.config.lineEnding === "LF") {
+        return "\n";
+      }
+      return "\r\n";
     }
-    return "\r\n";
+    return EOL;
   }
 }
 
